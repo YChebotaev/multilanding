@@ -15,18 +15,31 @@ var compileBlock = function (blockName, blockConfig) {
   var id = blockConfig.id;
   var selector = blockConfig.selector;
   var className = blockConfig.class;
+  var index = blockConfig.index;
 
   if (id != null) {
     // Skip
   } else
-  if (className != null) {
+  if (className != null && index == null) {
     block.getElement = function(){
       return document.getElementsByClassName(className)[0];
     }
   } else
-  if (selector != null) {
+  if (className != null && index != null) {
+    block.getElement = function(){
+      var elements = document.getElementsByClassName(className)[0];
+      return elements[index];
+    }
+  } else
+  if (selector != null && index == null) {
     block.getElement = function(){
       return document.querySelector(selector);
+    }
+  } else
+  if (selector != null && index != null) {
+    block.getElement = function(){
+      var elements = document.querySelectorAll(selector);
+      return elements[index];
     }
   } else {
     id = blockName;
