@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+  <span id="foo"></span>
+  
+  <script src="build/ad-targeting.js">
+
+  [blocks]
+
+  [blocks.foo]
+
+  [rules]
+  select = ga
+
+  [rules.1]
+  test = true
+  foo = "let me to take a selfie"
+
+  [rules.0]
+  ga.experiment = a22095132w43576209p43599432
+  test = x_variant=="1"
+  foo[] = "but first"
+  
+  </script>
+</body>
+</html>
