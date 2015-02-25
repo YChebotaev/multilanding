@@ -78,7 +78,7 @@ global.adTargeting = {
   config: config,
   rule: rule,
   exec: function(){
-    return this.rule && this.rule.exec(this.blocks);
+    return this.rule && this.rule.exec(this.config.blocks);
   }
 };
 
@@ -99,6 +99,18 @@ function tryEvalWith(code, global){
     }
   } catch (err) {
     console.error(err);
+  }
+}
+
+function isPromise (promise) {
+  return promise != null && typeof promise.then === 'function';
+}
+
+function promiseJoin (promise, then) {
+  if (isPromise(promise)) {
+    promise.then(then);
+  } else {
+    then(promise);
   }
 }
 
@@ -135,7 +147,7 @@ function parse () {
     }
   }
   config.blocks = blocks;
-
+  
   return config;
 }
 var config = parse();

@@ -8,7 +8,7 @@ global.adTargeting = {
   config: config,
   rule: rule,
   exec: function(){
-    return this.rule && this.rule.exec(this.blocks);
+    return this.rule && this.rule.exec(this.config.blocks);
   }
 };
 

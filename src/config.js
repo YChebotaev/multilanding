@@ -10,6 +10,18 @@ function tryEvalWith(code, global){
   }
 }
 
+function isPromise (promise) {
+  return promise != null && typeof promise.then === 'function';
+}
+
+function promiseJoin (promise, then) {
+  if (isPromise(promise)) {
+    promise.then(then);
+  } else {
+    then(promise);
+  }
+}
+
 function parse () {
   var config = {};
   var currentScript = document.currentScript;
@@ -43,7 +55,7 @@ function parse () {
     }
   }
   config.blocks = blocks;
-
+  
   return config;
 }
 var config = parse();
