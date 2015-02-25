@@ -7,8 +7,18 @@ var rule = matcher.match(config.rules);
 global.adTargeting = {
   config: config,
   rule: rule,
+  ondone: function(){
+    if (typeof this.config.ondone === 'function') {
+      return this.config.ondone.apply(this, arguments);
+    }
+  },
   exec: function(){
-    return this.rule && this.rule.exec(this.config.blocks);
+    var result;
+    if (this.rule != null && typeof this.rule.exec === 'function') {
+      result = this.rule.exec(this.config.blocks);
+      this.ondone();
+    }
+    return result;
   }
 };
 

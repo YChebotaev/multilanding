@@ -33,6 +33,8 @@ function parse () {
 
   config.params = [];
 
+  config.ondone = undefined;
+
   config.qs = queryString.parse(global.location.search);
 
   if (textContent) {
@@ -55,7 +57,7 @@ function parse () {
     }
   }
   config.blocks = blocks;
-  
+
   return config;
 }
 var config = parse();
